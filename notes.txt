@@ -4,7 +4,8 @@ install tai;wid css in frontend
 configure tailwind.js.config
 configure app.css
 install react-router-dom react-lottie react-icons country-state-city
-create styles static pages components and assets folders
+create styles static pages 
+components and ==assets folders==
 create login page as well configure react-router-dom also import css in app.css 
 create login componnet and use it in LoginPage
 create signup page and signup componnet
