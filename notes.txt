@@ -1,0 +1,34 @@
+configure project for backend and frontend
+install necssary dependicies from package.json
+install tai;wid css in frontend
+configure tailwind.js.config
+configure app.css
+install react-router-dom react-lottie react-icons country-state-city
+create styles static pages components and assets folders
+create login page as well configure react-router-dom also import css in app.css 
+create login componnet and use it in LoginPage
+create signup page and signup componnet
+move on to backend folder
+create app.js import express,  // config
+server.js i.e //handling uncaught exceptions, //config, // create server // unhandled promise rejection
+write script in package.json for start of server
+create db folder and create file Database.js
+server.js => connect database
+create utils folder and create file for error handler
+create middlewares folder import error.js and write module.exports and // wrong mongodb id error // duplicate key error // wrong jwt error // jwt expired 
+create catchAsyncErrors.js in middleware folder 
+create auth.js in middleware folder
+import ErrorHandler.js from utils folder in at last of app.js 
+import cookie parser in app.js  first use express.json(),the cookie.parser, import and use body parser, import and use file upload
+create model folder and userModel.js
+npm uninstall express-fileupload instead use npm i multer   
+create multer.js file in backed folder
+create controllers folder and create controller for user
+import routes for user in app.js
+create folder of uploads in root directory
+and use express.static
+move on to signup.jsx and complete sign up process
+import and use cors in backend
+amend/ update code in user controller regarding avatar
+work on create jwt in user controller for activation token
+create sendMail.js in utils folder
