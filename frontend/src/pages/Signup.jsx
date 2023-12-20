@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import {useDispatch} from "react-redux"
+import {registerUserAction} from "../actions/userActions"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
@@ -16,13 +23,23 @@ const Login = () => {
   const handleFileInputChange = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
-        if (reader.readyState===FileReader.DONE) {
-            // console.log(reader.result);
-            setAvatar(reader.result)
-        }
-    }
-    reader.readAsDataURL(e.target.files[0])
+      if (reader.readyState === FileReader.DONE) {
+        // console.log(reader.result);
+        setAvatar(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (password !== confirmPassword) {
+      alert("Password not matched")
+    }else{
+      dispatch(registerUserAction(name,email,password,avatar))
+    }
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -33,7 +50,7 @@ const Login = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm-rounded-lg sm:px-10">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
@@ -45,9 +62,11 @@ const Login = () => {
                 <input
                   type="text"
                   name="name"
+                  value={name}
                   autoComplete="name"
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   required
+                  onChange={(e)=>setName(e.target.value)}
                 />
               </div>
             </div>
@@ -61,10 +80,12 @@ const Login = () => {
               <div className="mt-1">
                 <input
                   type="email"
+                  value={email}
                   name="email"
                   autoComplete="email"
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   required
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -78,10 +99,12 @@ const Login = () => {
               <div className="mt-1 relative">
                 <input
                   type={passwordVisible ? "text" : "password"}
+                  value={password}
                   name="password"
                   autoComplete="password"
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   required
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
                 {passwordVisible ? (
                   <AiOutlineEye
@@ -107,10 +130,12 @@ const Login = () => {
                 <div className="mt-1 relative">
                   <input
                     type={confirmPasswordVisible ? "text" : "password"}
+                    value={confirmPassword}
                     name="password"
                     autoComplete="password"
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     required
+                    onChange={(e)=>setConfirmPassword(e.target.value)}
                   />
                   {confirmPasswordVisible ? (
                     <AiOutlineEye
@@ -176,6 +201,7 @@ const Login = () => {
                     <span>Upload a File</span>
                     <input
                       type="file"
+                      // value={avatar}
                       name="avatar"
                       id="input-file"
                       accept=".jpg, .jpeg, .png"
